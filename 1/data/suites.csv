@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Jun 13 11:48:09 GMT 2022","Mon Jun 13 11:48:11 GMT 2022","1539","","WebsiteTest","","WebsiteTest","registrationTest","registrationTest()",""
