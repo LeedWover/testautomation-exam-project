@@ -65,17 +65,39 @@ public class WebsiteTest {
     @Test
     public void portfolioListSizeTest() {
         Utils utils = new Utils(driver);
-        PortfolioListSize portfolioListSize = new PortfolioListSize(driver);
+        PortfolioList portfolioList = new PortfolioList(driver);
 
         utils.navigateToBasePage();
         utils.acceptConditions();
         utils.login();
 
-        portfolioListSize.navigate();
+        portfolioList.navigate();
 
-        int actual = portfolioListSize.countProjectItems();
+        int actual = portfolioList.countProjectItems();
         int expected = 5;
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void portfolioListComparisonTest() {
+        Utils utils = new Utils(driver);
+        PortfolioList portfolioList = new PortfolioList(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        portfolioList.navigate();
+        String[] actual = portfolioList.getProjectlistData();
+        String[] expected = {
+                "KIO-TAPE BRAND",
+                "USE-LESS BRAND",
+                "OSEN CLOCK",
+                "SEAMLESS WATCH"
+        };
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 }

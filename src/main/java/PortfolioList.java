@@ -1,9 +1,12 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class PortfolioListSize {
+import java.util.List;
+
+public class PortfolioList {
     WebDriver driver;
-    public PortfolioListSize(WebDriver driver) {
+    public PortfolioList(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -33,6 +36,17 @@ public class PortfolioListSize {
         while (!paginate());
 
         return numberOfItems;
+    }
+
+    public String[] getProjectlistData() {
+        List<WebElement> listItems = driver.findElements(projectItems);
+        String[] itemNames = new String[listItems.size()];
+
+        for(int i = 0; i < listItems.size(); i++) {
+            itemNames[i] = listItems.get(i).findElement(By.tagName("H3")).getText();
+        }
+
+        return itemNames;
     }
 
 }
