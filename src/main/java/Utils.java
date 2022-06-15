@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class Utils {
     WebDriver driver;
@@ -17,6 +18,29 @@ public class Utils {
     }
 
     public void acceptConditions() {
-        driver.findElement(acceptButton).click();
+        try {
+            driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            driver.findElement(acceptButton).click();
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    public void login() {
+        Registration registration = new Registration(driver);
+        Login login = new Login(driver);
+
+        navigateToBasePage();
+        acceptConditions();
+
+        registration.navigateToRegistrationPage();
+        registration.fillTheFieldsWithUserData("user", "abcd", "valami@valami.com", "Hello my name is");
+        registration.makeARegistration();
+
+        login.navigateToLoginPage();
+        login.fillTheFieldsWithUserData("user", "abcd");
+        login.clickToLogin();
+    }
+
 }

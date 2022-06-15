@@ -2,10 +2,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.util.concurrent.TimeUnit;
 
 
@@ -35,9 +34,11 @@ public class WebsiteTest {
     public void registrationTest() {
         Registration registration = new Registration(driver);
         Utils utils = new Utils(driver);
+
         utils.navigateToBasePage();
         utils.acceptConditions();
-        registration.clickToRegistration();
+
+        registration.navigateToRegistrationPage();
         registration.fillTheFieldsWithUserData("user", "abcd", "valami@valami.com", "Hello my name is");
 
         String actual = registration.makeARegistration();
@@ -46,4 +47,35 @@ public class WebsiteTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void loginTest() {
+        Login login = new Login(driver);
+        Utils utils = new Utils(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+
+        utils.login();
+
+        boolean isLoggedIn = login.isLoggedIn();
+
+        Assertions.assertTrue(isLoggedIn);
+    }
+
+    @Test
+    public void portfolioListSizeTest() {
+        Utils utils = new Utils(driver);
+        PortfolioListSize portfolioListSize = new PortfolioListSize(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        portfolioListSize.navigate();
+
+        int actual = portfolioListSize.countProjectItems();
+        int expected = 5;
+
+        Assertions.assertEquals(expected, actual);
+    }
 }

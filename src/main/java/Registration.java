@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 public class Registration {
     WebDriver driver;
 
-    private final By navigateToRegistrationPageButton = By.xpath("//button[@id=\"register-form-button\"]");
+    private final By registrationPageButton = By.xpath("//button[@id=\"register-form-button\"]");
     private final By registrationButton = By.xpath("//button[@onclick=\"registerUser()\"]");
     private final By usernameField = By.xpath("//input[@id=\"register-username\"]");
     private final By passwordField = By.xpath("//input[@id=\"register-password\"]");
@@ -16,15 +16,15 @@ public class Registration {
         this.driver = driver;
     }
 
-    public void clickToRegistration() {
-        driver.findElement(navigateToRegistrationPageButton).click();
+    public void navigateToRegistrationPage() {
+        driver.findElement(registrationPageButton).click();
     }
 
-    public void fillTheFieldsWithUserData(String username, String password, String email, String descprtion) {
+    public void fillTheFieldsWithUserData(String username, String password, String email, String description) {
         driver.findElement(usernameField).sendKeys(username);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(emailField).sendKeys(email);
-        driver.findElement(descriptionField).sendKeys(descprtion);
+        driver.findElement(descriptionField).sendKeys(description);
 
     }
     public String makeARegistration() {
