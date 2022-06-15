@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jun 15 15:11:24 GMT 2022","Wed Jun 15 15:11:26 GMT 2022","1806","","WebsiteTest","","WebsiteTest","portfolioListComparisonTest","portfolioListComparisonTest()",""
+"passed","Wed Jun 15 15:11:23 GMT 2022","Wed Jun 15 15:11:24 GMT 2022","1007","","WebsiteTest","","WebsiteTest","registrationTest","registrationTest()",""
+"passed","Wed Jun 15 15:11:19 GMT 2022","Wed Jun 15 15:11:21 GMT 2022","2210","","WebsiteTest","","WebsiteTest","loginTest","loginTest()",""
+"passed","Wed Jun 15 15:11:22 GMT 2022","Wed Jun 15 15:11:23 GMT 2022","1898","","WebsiteTest","","WebsiteTest","portfolioListSizeTest","portfolioListSizeTest()",""
