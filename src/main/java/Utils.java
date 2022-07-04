@@ -17,6 +17,13 @@ public class Utils {
         driver.navigate().to(baseUrl);
     }
 
+    public Boolean isThereConditions() {
+        if(driver.findElements(acceptButton).isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public void acceptConditions() {
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

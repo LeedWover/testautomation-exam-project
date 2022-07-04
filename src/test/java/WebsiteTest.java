@@ -1,10 +1,15 @@
+import groovy.util.logging.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,6 +33,15 @@ public class WebsiteTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+    }
+
+    @Test
+    public void isThereConditionsTest() {
+        Utils utils = new Utils(driver);
+
+        utils.navigateToBasePage();
+
+        Assertions.assertTrue(utils.isThereConditions());
     }
 
     @Test
@@ -63,7 +77,7 @@ public class WebsiteTest {
     }
 
     @Test
-    public void portfolioListSizeTest() {
+    public void portfolioPaginationTest() {
         Utils utils = new Utils(driver);
         PortfolioList portfolioList = new PortfolioList(driver);
 
@@ -100,4 +114,32 @@ public class WebsiteTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void makeRegistrationFromJsonTest() {
+        Utils utils = new Utils(driver);
+        Login login = new Login(driver);
+        Registration registration = new Registration(driver);
+
+        List<Map> users = registration.createUsersFromJson();
+        for(Map user : users) {
+            utils.navigateToBasePage();
+            utils.acceptConditions();
+            registration.navigateToRegistrationPage();
+            registration.fillTheFieldsWithUserData(user.get("name").toString(), user.get("password").toString(), user.get("email").toString(), user.get("description").toString());
+            registration.makeARegistration();
+            //driver.manage().deleteAllCookies();
+            driver.navigate().refresh();
+        }
+
+        login.fillTheFieldsWithUserData("Samantha", "ramiro.info");
+        login.clickToLogin();
+        boolean isLoggedIn = login.isLoggedIn();
+        Assertions.assertTrue(isLoggedIn);
+    }
+
+    @AfterEach
+    public void Dispose(){
+        driver.manage().deleteAllCookies();
+        driver.quit();
+    }
 }
