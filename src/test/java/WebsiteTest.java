@@ -1,4 +1,3 @@
-import groovy.util.logging.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -115,6 +114,22 @@ public class WebsiteTest {
     }
 
     @Test
+    public void insertNewDataTest() {
+        Utils utils = new Utils(driver);
+        GetInTouch getInTouch = new GetInTouch(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+        getInTouch.navigate();
+        getInTouch.fillTheFields("Gábor", "Nagy", "test@test.com", "wd", "Hello, i want to get in touch, please respond me!");
+
+        String actual = getInTouch.getSuccessMessageFromAlert();
+        String expected = "Message sent!";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void makeRegistrationFromJsonTest() {
         Utils utils = new Utils(driver);
         Login login = new Login(driver);
@@ -127,7 +142,6 @@ public class WebsiteTest {
             registration.navigateToRegistrationPage();
             registration.fillTheFieldsWithUserData(user.get("name").toString(), user.get("password").toString(), user.get("email").toString(), user.get("description").toString());
             registration.makeARegistration();
-            //driver.manage().deleteAllCookies();
             driver.navigate().refresh();
         }
 
