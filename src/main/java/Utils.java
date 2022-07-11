@@ -36,7 +36,7 @@ public class Utils {
 
     public void login() {
         Registration registration = new Registration(driver);
-        Login login = new Login(driver);
+        LoginLogout login = new LoginLogout(driver);
 
         navigateToBasePage();
         acceptConditions();

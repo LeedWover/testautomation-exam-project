@@ -3,7 +3,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Login {
+public class LoginLogout {
     WebDriver driver;
 
     private final By loginPageButton = By.xpath("//div[@style=\"display: block;\"]/button[@id=\"login-form-button\"]");
@@ -12,7 +12,7 @@ public class Login {
     private final By registrationButton = By.xpath("//button[@onclick=\"myFunction()\"]");
     private final By logoutButton = By.xpath("//li[@id=\"logout-link\"]/a");
 
-    public Login(WebDriver driver) {
+    public LoginLogout(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -27,6 +27,10 @@ public class Login {
 
     public void clickToLogin() {
         driver.findElement(registrationButton).click();
+    }
+
+    public void logout() {
+        driver.findElement(logoutButton).click();
     }
 
     public boolean isLoggedIn() {

@@ -62,7 +62,7 @@ public class WebsiteTest {
 
     @Test
     public void loginTest() {
-        Login login = new Login(driver);
+        LoginLogout login = new LoginLogout(driver);
         Utils utils = new Utils(driver);
 
         utils.navigateToBasePage();
@@ -132,7 +132,7 @@ public class WebsiteTest {
     @Test
     public void makeRegistrationFromJsonTest() {
         Utils utils = new Utils(driver);
-        Login login = new Login(driver);
+        LoginLogout login = new LoginLogout(driver);
         Registration registration = new Registration(driver);
 
         List<Map> users = registration.createUsersFromJson();
@@ -145,12 +145,41 @@ public class WebsiteTest {
             driver.navigate().refresh();
         }
 
-        login.fillTheFieldsWithUserData("Samantha", "ramiro.info");
+        login.fillTheFieldsWithUserData(users.get(2).get("name").toString(), users.get(2).get("password").toString());
         login.clickToLogin();
         boolean isLoggedIn = login.isLoggedIn();
         Assertions.assertTrue(isLoggedIn);
     }
 
+    @Test
+    public void modifyDataTest() {
+        Utils utils = new Utils(driver);
+        ModifyData modifyData = new ModifyData(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        modifyData.navigate();
+        modifyData.changeName("Józsi");
+        Boolean actual = modifyData.isNameChanged();
+
+        Assertions.assertTrue(actual);
+    }
+
+    @Test
+    public void logoutTest() {
+        Utils utils = new Utils(driver);
+        LoginLogout logout = new LoginLogout(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        logout.logout();
+        Boolean actual = logout.isLoggedIn();
+        Assertions.assertFalse(actual);
+    }
     @AfterEach
     public void Dispose(){
         driver.manage().deleteAllCookies();
