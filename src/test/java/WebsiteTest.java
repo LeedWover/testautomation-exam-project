@@ -168,6 +168,42 @@ public class WebsiteTest {
     }
 
     @Test
+    public void deleteUserTest() {
+        Utils utils = new Utils(driver);
+        LoginLogout login = new LoginLogout(driver);
+        DeleteUser deleteUser = new DeleteUser(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        deleteUser.navigate();
+        deleteUser.deleteAccount();
+
+        boolean isLoggedIn = login.isLoggedIn();
+
+        Assertions.assertFalse(isLoggedIn);
+    }
+
+    @Test
+    public void saveDataToFileTest() {
+        String fileName = "textlist";
+        Utils utils = new Utils(driver);
+        SaveDataToFile saveDataToFile = new SaveDataToFile(driver);
+
+        utils.navigateToBasePage();
+        utils.acceptConditions();
+        utils.login();
+
+        saveDataToFile.navigate();
+        saveDataToFile.createFile(fileName);
+        String actual = saveDataToFile.writeToFile(fileName);
+        String expected = "Successfully wrote to the file.";
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void logoutTest() {
         Utils utils = new Utils(driver);
         LoginLogout logout = new LoginLogout(driver);
@@ -180,6 +216,7 @@ public class WebsiteTest {
         Boolean actual = logout.isLoggedIn();
         Assertions.assertFalse(actual);
     }
+
     @AfterEach
     public void Dispose(){
         driver.manage().deleteAllCookies();
