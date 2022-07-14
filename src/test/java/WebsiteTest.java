@@ -25,7 +25,7 @@ public class WebsiteTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-extensions");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("start-maximized");
 
@@ -219,7 +219,7 @@ public class WebsiteTest {
 
     @AfterEach
     public void Dispose(){
-        //driver.manage().deleteAllCookies();
-        //driver.quit();
+        driver.manage().deleteAllCookies();
+        driver.quit();
     }
 }
