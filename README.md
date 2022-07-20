@@ -8,6 +8,6 @@
 ## How to run locally:
 
   1. Clone the repo (https://github.com/LeedWover/testautomation-exam-project)
-  2. Open in IntelliJ
+  2. Open it in IDE(I recommend using IntelliJ)
   3. The tests are in /src/test/java/WebsiteTest
   
