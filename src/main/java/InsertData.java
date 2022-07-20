@@ -1,10 +1,10 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class GetInTouch {
+public class InsertData {
 
     WebDriver driver;
-    public GetInTouch(WebDriver driver) {
+    public InsertData(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -38,5 +38,9 @@ public class GetInTouch {
 
     public String getSuccessMessageFromAlert() {
         return driver.switchTo().alert().getText();
+    }
+
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
     }
 }

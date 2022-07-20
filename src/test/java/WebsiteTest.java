@@ -25,7 +25,7 @@ public class WebsiteTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-extensions");
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("start-maximized");
 
@@ -116,15 +116,16 @@ public class WebsiteTest {
     @Test
     public void insertNewDataTest() {
         Utils utils = new Utils(driver);
-        GetInTouch getInTouch = new GetInTouch(driver);
+        InsertData insertData = new InsertData(driver);
 
         utils.navigateToBasePage();
         utils.acceptConditions();
         utils.login();
-        getInTouch.navigate();
-        getInTouch.fillTheFields("Gábor", "Nagy", "test@test.com", "wd", "Hello, i want to get in touch, please respond me!");
+        insertData.navigate();
+        insertData.fillTheFields("Gábor", "Nagy", "test@test.com", "wd", "Hello, i want to get in touch, please respond me!");
 
-        String actual = getInTouch.getSuccessMessageFromAlert();
+        String actual = insertData.getSuccessMessageFromAlert();
+        insertData.acceptAlert();
         String expected = "Message sent!";
         Assertions.assertEquals(expected, actual);
     }
